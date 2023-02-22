@@ -36,7 +36,7 @@ function App () {
         })
     }
 
-    function addManager() {
+    function addEngineer() {
         inquirer.prompt([
 
             {
@@ -69,4 +69,86 @@ function App () {
             createTeam();
         });
     }
+
+    function addIntern () {
+        inquirer.prompt([
+
+            {
+                type: "input",
+                name: "internName",
+                message: "What is the name of the Intern?"
+            },
+
+            {
+                type: "input",
+                name: "internID",
+                message: "What is the ID number for this intern?"
+            },
+
+            {
+                type: "input",
+                name: "internEmail",
+                message: "What is the Intern's email?"
+            },
+
+            {
+                type: "input",
+                name: "internSchool",
+                message: "What school does this intern attend?"
+            }
+
+        ]).then(answers => {
+            const intern = new Intern (answers.internName, answers.internID, answers.internEmail, answers.internSchool);
+            teamArray.push(intern); //pushes responses to the array we set up on line 13
+            createTeam();
+        });
+
+
+    }
+
+    function addManage() {
+        inquirer.prompt ([
+
+            {
+                type: "input",
+                name: "managerName",
+                message: "What is the name of the Manager?"
+            },
+
+            {
+                type: "input",
+                name: "managerID",
+                message: "What is the employee ID for this Manager?"
+            },
+
+            {
+                type: "input",
+                name: "managerEmail",
+                message: "What is this Manager's email?"
+            },
+
+            {
+                type: "input",
+                name: "managerOfficeNumber",
+                message: "What is the Manager's office number?"
+            }
+
+        ]).then(answers => {
+            const manager = new Manager (answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber);
+            teamArray.push(manager);
+            createTeam();
+        });
+    }
+
+
+    function htmlBuilder () {
+        console.log("Your new team has been created!")
+
+        fs.writeFileSync(outputPath, generateTeam(teamArray), "UTF-8")
+    }
+
+    createTeam();
+
 }
+
+App();
