@@ -7,7 +7,8 @@ const path = require('path');
 const fs = require('fs');
 const OUPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUPUT_DIR, team.html)
-const generateTeam = require('./src/template.js')
+const generateTeam = require('./src/template.js');
+const { create } = require('domain');
 
 teamArray = [];
 
@@ -33,5 +34,39 @@ function App () {
                     htmlBuilder()
             }
         })
+    }
+
+    function addManager() {
+        inquirer.prompt([
+
+            {
+                type: "input",
+                name: "engineerName",
+                message: "What is the name of the Engineer?"
+            },
+
+            {
+                type: "input",
+                name: "engineerID",
+                message: "What is the employee ID for this Engineer?"
+            },
+
+            {
+                type: "input",
+                name: "engineerEmail",
+                message: "What is the engineer's email adress?"
+            },
+
+            {
+                type: "input",
+                name: "engineerGithub",
+                message: "What is the Github username for this enigneer?"
+            }
+
+        ]).then(answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub);
+            teamArray.push(engineer);
+            createTeam();
+        });
     }
 }
