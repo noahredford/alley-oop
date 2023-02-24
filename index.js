@@ -6,7 +6,7 @@ const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
 const OUPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUPUT_DIR, team.html)
+const outputPath = path.join(OUPUT_DIR, 'team.html')
 const generateTeam = require('./src/template.js');
 const { create } = require('domain');
 
@@ -106,7 +106,7 @@ function App () {
 
     }
 
-    function addManage() {
+    function addManager() {
         inquirer.prompt ([
 
             {
